@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <rect width="240" height="240" fill="#06030a"/>
+  <defs>
+    <linearGradient id="g1" x1="35" y1="30" x2="200" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#b05aff"/>
+      <stop offset="30%" stop-color="#9333ea"/>
+      <stop offset="70%" stop-color="#7928ca"/>
+      <stop offset="100%" stop-color="#581c87"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 1. Top Section -->
+  <path fill-rule="evenodd" clip-rule="evenodd"
+    d="M 35 32 
+       L 142 32 
+       C 176 32 192 52 192 74 
+       C 192 96 176 116 142 116 
+       L 72 116 
+       L 72 68 
+       Z 
+       M 104 64 
+       L 136 64 
+       C 152 64 160 74 160 88 
+       C 160 102 152 108 136 108 
+       L 104 108 
+       Z"
+    fill="url(#g1)" />
+
+  <!-- 2. Central Diagonal Slash -->
+  <polygon 
+    points="35,172 122,85 148,111 61,198" 
+    fill="url(#g1)" />
+
+  <!-- 3. Lower Lobe -->
+  <path fill-rule="evenodd" clip-rule="evenodd"
+    d="M 76 210 
+       L 152 134 
+       C 182 134 202 154 202 176 
+       C 202 200 180 210 146 210 
+       Z 
+       M 116 182 
+       L 142 156 
+       C 158 156 168 166 168 178 
+       C 168 190 156 194 140 194 
+       L 116 194 
+       Z"
+    fill="url(#g1)" />
+</svg>

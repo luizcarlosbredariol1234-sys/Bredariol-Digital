@@ -1,0 +1,6 @@
+{
+  "name": "Bredariol Digital",
+  "description": "Agência de criação de sites profissionais, de alto padrão e alta conversão para empresas que querem faturar mais. Entrega no mesmo dia com qualidade e design premium.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

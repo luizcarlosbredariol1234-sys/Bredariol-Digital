@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Master Body Gradient: Electric Violet to Deep Imperial Purple -->
+    <linearGradient id="symGrad" x1="52" y1="36" x2="276" y2="332" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#e9d5ff" />
+      <stop offset="18%" stop-color="#c084fc" />
+      <stop offset="48%" stop-color="#9333ea" />
+      <stop offset="78%" stop-color="#6b21a8" />
+      <stop offset="100%" stop-color="#3b0764" />
+    </linearGradient>
+
+    <!-- Left Spine Pillar Gradient -->
+    <linearGradient id="symSpine" x1="52" y1="36" x2="106" y2="332" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f5d0fe" />
+      <stop offset="22%" stop-color="#c084fc" />
+      <stop offset="65%" stop-color="#9333ea" />
+      <stop offset="100%" stop-color="#4c1d95" />
+    </linearGradient>
+
+    <!-- Cyber Diagonal Light Blade (45-degree digital signature) -->
+    <linearGradient id="symBlade" x1="40" y1="260" x2="240" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="30%" stop-color="#f0abfc" stop-opacity="0.75" />
+      <stop offset="70%" stop-color="#c084fc" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#9333ea" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Top Shoulder Specular Highlight -->
+    <linearGradient id="symSheen" x1="52" y1="36" x2="220" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="45%" stop-color="#f5d0fe" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Deep Ambient Neon Glow Filter -->
+    <filter id="symAmbient" x="-25%" y="-25%" width="150%" height="150%" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+    </filter>
+
+    <!-- Exact Silhouette Clip Path -->
+    <clipPath id="symClip">
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="
+          M 66 36
+          H 186
+          C 236 36 264 64 264 106
+          C 264 140 238 164 196 170
+          C 246 176 274 204 274 252
+          C 274 298 238 332 188 332
+          H 66
+          C 58 332 52 326 52 318
+          V 50
+          C 52 42 58 36 66 36
+          Z
+          M 106 84
+          H 180
+          C 204 84 216 94 216 106
+          C 216 118 204 128 180 128
+          H 106
+          V 84
+          Z
+          M 106 196
+          H 184
+          C 212 196 226 210 226 252
+          C 226 270 212 284 184 284
+          H 106
+          V 196
+          Z
+        "
+      />
+    </clipPath>
+  </defs>
+
+  <!-- 0. Ambient Neon Atmosphere Behind -->
+  <path
+    d="M 64 44 H 184 C 230 44 260 70 260 108 C 260 140 238 164 198 170 C 244 176 270 204 270 252 C 270 296 236 324 188 324 H 64 V 44 Z"
+    fill="#a855f7"
+    opacity="0.32"
+    filter="url(#symAmbient)"
+  />
+
+  <!-- 1. Base Solid Architectural Silhouette -->
+  <path fill-rule="evenodd" clip-rule="evenodd"
+    d="
+      M 66 36
+      H 186
+      C 236 36 264 64 264 106
+      C 264 140 238 164 196 170
+      C 246 176 274 204 274 252
+      C 274 298 238 332 188 332
+      H 66
+      C 58 332 52 326 52 318
+      V 50
+      C 52 42 58 36 66 36
+      Z
+      M 106 84
+      H 180
+      C 204 84 216 94 216 106
+      C 216 118 204 128 180 128
+      H 106
+      V 84
+      Z
+      M 106 196
+      H 184
+      C 212 196 226 210 226 252
+      C 226 270 212 284 184 284
+      H 106
+      V 196
+      Z
+    "
+    fill="url(#symGrad)"
+  />
+
+  <!-- 2. Clipped Interior Architectural Layers & Cyber Accents -->
+  <g clip-path="url(#symClip)">
+    <!-- Left Spine Pillar Shading -->
+    <rect x="52" y="36" width="54" height="296" fill="url(#symSpine)" opacity="0.6" />
+    
+    <!-- Subtle Spine Divider Line -->
+    <line x1="106" y1="36" x2="106" y2="332" stroke="#e9d5ff" stroke-opacity="0.25" stroke-width="1.5" />
+
+    <!-- Sleek 45-Degree Cyber Blade Light Beam -->
+    <polygon
+      points="20,290 190,120 230,120 60,290"
+      fill="url(#symBlade)"
+    />
+
+    <!-- Top Shoulder Specular Sheen -->
+    <path
+      d="M 52 36 H 186 C 230 36 256 60 262 96 C 252 52 224 40 184 40 H 52 Z"
+      fill="url(#symSheen)"
+    />
+
+    <!-- Waist Subtle Lighting Accent -->
+    <line x1="106" y1="170" x2="196" y2="170" stroke="#f5d0fe" stroke-opacity="0.45" stroke-width="2" />
+  </g>
+</svg>

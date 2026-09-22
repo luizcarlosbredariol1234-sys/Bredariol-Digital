@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Theme Palette: Purple with Deep Black background and Vibrant Accents */
+    --color-bg-base: #030106;
+    --color-bg-surface: #0a0612;
+    --color-bg-card: rgba(18, 11, 30, 0.7);
+    --color-bg-card-hover: rgba(26, 16, 44, 0.85);
+    --color-bg-elevated: #160c26;
+
+    /* Brand Purples */
+    --color-primary: #9d4edd;
+    --color-primary-light: #c77dff;
+    --color-primary-dark: #7209b7;
+    --color-primary-deep: #560bad;
+    --color-primary-vibrant: #bd00ff;
+    --color-accent-electric: #e0aaff;
+
+    /* Borders */
+    --border-subtle: rgba(157, 78, 221, 0.18);
+    --border-bright: rgba(199, 125, 255, 0.45);
+    --border-glow: rgba(189, 0, 255, 0.65);
+
+    /* Text */
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-accent: #d8b4fe;
+
+    /* Gradients */
+    --grad-brand: linear-gradient(135deg, #bd00ff 0%, #8a2be2 50%, #4c1d95 100%);
+    --grad-vibrant: linear-gradient(90deg, #f3e8ff 0%, #c77dff 35%, #9d4edd 70%, #7209b7 100%);
+    --grad-card: linear-gradient(180deg, rgba(30, 16, 51, 0.6) 0%, rgba(10, 6, 18, 0.95) 100%);
+    --grad-glow: radial-gradient(circle at 50% 0%, rgba(189, 0, 255, 0.22) 0%, rgba(3, 1, 6, 0) 70%);
+
+    /* Shadows & Glows */
+    --glow-purple-sm: 0 0 15px rgba(157, 78, 221, 0.25);
+    --glow-purple-md: 0 0 35px rgba(189, 0, 255, 0.35);
+    --glow-purple-lg: 0 0 65px rgba(157, 78, 221, 0.45);
+  }
+
+  body {
+    background-color: var(--color-bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Custom scrollbar in agency purple style */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #05020a;
+}
+::-webkit-scrollbar-thumb {
+  background: #3b1464;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7209b7;
+}
+
+/* Utility animation & glow classes */
+.glass-panel {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+}
+
+.glass-panel:hover {
+  border-color: var(--border-bright);
+}
+
+.glow-box {
+  box-shadow: var(--glow-purple-md);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 20%, #e0aaff 60%, #c77dff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 40%, #9333ea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-vibrant {
+  background: linear-gradient(90deg, #f5d0fe 0%, #d946ef 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ambient-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(157, 78, 221, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(157, 78, 221, 0.05) 1px, transparent 1px);
+}
+
+.ambient-spotlight {
+  background: radial-gradient(circle 800px at 50% -100px, rgba(157, 78, 221, 0.22), transparent 70%);
+}

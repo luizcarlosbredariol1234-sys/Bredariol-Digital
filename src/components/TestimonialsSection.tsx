@@ -115,7 +115,7 @@ export const TestimonialsSection: React.FC = () => {
         {/* Trust Banner with WhatsApp Invitation */}
         <div className="mt-16 p-6 rounded-2xl bg-purple-950/20 border border-purple-800/30 text-center max-w-2xl mx-auto">
           <p className="text-sm text-slate-300 font-medium">
-            Junte-se a mais de <strong className="text-white">+180 empresários</strong> que transformaram seus resultados digitais com a Bredariol Digital.
+            Junte-se aos empresários que transformaram seus resultados digitais com a Bredariol Digital.
           </p>
         </div>
 

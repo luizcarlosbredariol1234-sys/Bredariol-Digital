@@ -15,7 +15,7 @@ import {
   Gauge
 } from 'lucide-react';
 import { BredariolLogo } from './BredariolLogo';
-import { AGENCY_INFO, TRUST_STATS } from '../data/agencyData';
+import { AGENCY_INFO } from '../data/agencyData';
 
 interface HeroSectionProps {
   onOpenContact: () => void;
@@ -24,8 +24,8 @@ interface HeroSectionProps {
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
   const [activeDevice, setActiveDevice] = useState<'desktop' | 'mobile'>('desktop');
 
-  const scrollToPortfolio = () => {
-    const el = document.getElementById('portfolio');
+  const scrollToServices = () => {
+    const el = document.getElementById('servicos');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -108,10 +108,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
 
               {/* Secondary CTA */}
               <button
-                onClick={scrollToPortfolio}
+                onClick={scrollToServices}
                 className="px-6 py-4 rounded-full font-semibold text-sm sm:text-base text-slate-200 hover:text-white bg-slate-900/60 hover:bg-purple-950/40 border border-purple-800/30 hover:border-purple-600/60 transition-all duration-300 flex items-center justify-center gap-2 text-center"
               >
-                <span>Ver Portfólio de Sites</span>
+                <span>Conhecer Nossos Serviços</span>
               </button>
             </motion.div>
 
@@ -235,31 +235,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
             </motion.div>
           </div>
 
-        </div>
-
-        {/* Global Stats Counter Bar */}
-        <div className="mt-16 sm:mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {TRUST_STATS.map((stat, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="p-5 sm:p-6 rounded-2xl bg-[#0e0818]/80 border border-purple-900/30 hover:border-purple-600/40 transition-all duration-300 relative overflow-hidden group"
-            >
-              <div className="absolute -right-6 -top-6 w-20 h-20 bg-purple-600/10 rounded-full blur-xl group-hover:bg-purple-600/20 transition-colors" />
-              <p className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-400 to-fuchsia-400 font-['Space_Grotesk']">
-                {stat.value}
-              </p>
-              <p className="text-sm sm:text-base font-semibold text-white mt-1">
-                {stat.label}
-              </p>
-              <p className="text-xs text-slate-400 mt-1 leading-normal">
-                {stat.desc}
-              </p>
-            </motion.div>
-          ))}
         </div>
 
       </div>

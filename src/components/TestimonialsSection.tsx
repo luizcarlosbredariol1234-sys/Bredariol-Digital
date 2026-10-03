@@ -1,122 +1,122 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Star, Quote, CheckCircle, Sparkles, Clock, TrendingUp } from 'lucide-react';
+import { Star, Quote, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { TESTIMONIALS_LIST } from '../data/agencyData';
 
 export const TestimonialsSection: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const testimonials = [
+    {
+      text: "A Bredariol transformou nossa ideia em uma estrutura web impressionante e de altíssima conversão. Altamente profissional, criativo e entregou rigorosamente no mesmo dia.",
+      name: "Dra. Patrícia Silveira",
+      role: "Diretora Clínica, Instituto Silveira",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
+      stars: 5
+    },
+    {
+      text: "Experiência incrível trabalhando com a Bredariol. Ótima comunicação, código impecável e notas máximas no Google PageSpeed. As vendas aumentaram logo na primeira semana.",
+      name: "Rodrigo Mendes",
+      role: "Fundador, Soluções Industriais RM",
+      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop",
+      stars: 5
+    },
+    {
+      text: "O design e a velocidade do site superaram todas as expectativas da nossa diretoria. A atenção aos detalhes de usabilidade e conversão pelo WhatsApp foi impecável.",
+      name: "Camila Becker",
+      role: "Gerente Comercial, Becker Consultoria",
+      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop",
+      stars: 5
+    }
+  ];
+
   return (
-    <section id="depoimentos" className="py-24 relative overflow-hidden bg-[#06030c] border-t border-purple-950/30">
-      {/* Background glow accents */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-purple-900/15 blur-[160px] pointer-events-none" />
+    <section id="depoimentos" className="py-24 relative overflow-hidden bg-[#040108] text-white border-t border-purple-950/30">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-purple-900/10 blur-[170px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Heading */}
+        {/* Section Heading matching reference image */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/70 border border-purple-700/40 text-purple-300 text-xs font-semibold uppercase tracking-wider mb-4"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-            <span>Depoimentos & Casos Reais</span>
-          </motion.div>
+          <div className="inline-flex items-center gap-2 mb-3 text-xs font-semibold tracking-wider text-purple-400 uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+            <span>Depoimentos</span>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight"
-          >
-            O que dizem os empresários que <span className="text-gradient-vibrant">confiaram na Bredariol</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed"
-          >
-            Histórias reais de quem precisava de velocidade, profissionalismo e resultados imediatos de faturamento.
-          </motion.p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+            O Que Nossos Clientes{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-400">
+              Dizem
+            </span>
+          </h2>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {TESTIMONIALS_LIST.map((testimonial, idx) => (
-            <motion.div
-              key={testimonial.id}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="rounded-2xl p-1 bg-gradient-to-b from-purple-800/30 via-purple-950/15 to-transparent hover:from-purple-600/40 transition-all duration-300 flex flex-col group"
-            >
-              <div className="rounded-[15px] bg-[#0b0614]/95 border border-purple-900/30 group-hover:border-purple-600/40 p-6 sm:p-8 flex flex-col h-full transition-all duration-300 shadow-xl relative overflow-hidden">
-                
-                {/* Subtle Quote icon */}
-                <Quote className="absolute right-6 top-6 w-12 h-12 text-purple-900/20 group-hover:text-purple-600/15 transition-colors pointer-events-none" />
-
-                {/* Rating stars & Delivery speed tag */}
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                  <div className="flex items-center gap-1">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                    ))}
-                    <span className="ml-2 text-xs font-bold text-slate-300">5.0</span>
+        {/* 3 Testimonials Cards in Row with Left/Right Nav Arrows */}
+        <div className="relative flex items-center justify-center">
+          
+          {/* 3-Card Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            {testimonials.map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="p-7 rounded-2xl bg-[#090414]/90 border border-purple-900/30 hover:border-purple-600/50 transition-all duration-300 flex flex-col justify-between shadow-xl relative"
+              >
+                <div>
+                  {/* Purple Quote Mark Box matching reference image */}
+                  <div className="w-8 h-8 rounded-lg bg-purple-600/30 border border-purple-500/40 flex items-center justify-center text-purple-300 mb-4 text-sm font-serif font-black">
+                    “
                   </div>
 
-                  <span className="px-3 py-1 rounded-full text-[11px] font-bold text-purple-300 bg-purple-950/70 border border-purple-800/40 flex items-center gap-1">
-                    {testimonial.deliveryHighlight}
-                  </span>
+                  {/* Testimonial text */}
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+                    {item.text}
+                  </p>
                 </div>
 
-                {/* Testimonial Quote */}
-                <p className="text-sm sm:text-base text-slate-200 leading-relaxed italic mb-6 relative z-10 flex-grow">
-                  "{testimonial.text}"
-                </p>
+                <div>
+                  {/* Client Info and Stars */}
+                  <div className="flex items-center justify-between pt-4 border-t border-purple-950/60">
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={item.avatar}
+                        alt={item.name}
+                        className="w-10 h-10 rounded-full object-cover border border-purple-500/50"
+                      />
+                      <div>
+                        <h4 className="text-xs sm:text-sm font-bold text-white leading-tight">
+                          {item.name}
+                        </h4>
+                        <p className="text-[11px] text-slate-400 leading-tight mt-0.5">
+                          {item.role}
+                        </p>
+                      </div>
+                    </div>
 
-                {/* Metric achieved pill */}
-                <div className="mb-6 p-3 rounded-xl bg-purple-950/40 border border-purple-800/30 flex items-center gap-2.5 text-xs text-purple-200 font-semibold">
-                  <TrendingUp className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Resultado: {testimonial.resultMetric}</span>
-                </div>
-
-                {/* Author Info */}
-                <div className="pt-4 border-t border-purple-950/60 flex items-center gap-3">
-                  <img
-                    src={testimonial.avatarUrl}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover border-2 border-purple-600/60 shadow-md"
-                    loading="lazy"
-                  />
-                  <div>
-                    <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
-                      <span>{testimonial.name}</span>
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-400" title="Cliente Verificado" />
-                    </h4>
-                    <p className="text-xs text-slate-400">
-                      {testimonial.role} • {testimonial.company}
-                    </p>
-                    <p className="text-[11px] text-purple-400 font-medium">
-                      {testimonial.location}
-                    </p>
+                    {/* Gold Star rating */}
+                    <div className="flex items-center gap-0.5">
+                      {[...Array(item.stars)].map((_, sIdx) => (
+                        <Star key={sIdx} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
+
         </div>
 
-        {/* Trust Banner with WhatsApp Invitation */}
-        <div className="mt-16 p-6 rounded-2xl bg-purple-950/20 border border-purple-800/30 text-center max-w-2xl mx-auto">
-          <p className="text-sm text-slate-300 font-medium">
-            Junte-se aos empresários que transformaram seus resultados digitais com a Bredariol Digital.
-          </p>
+        {/* Pagination Dots Below matching reference image */}
+        <div className="flex items-center justify-center gap-2 mt-10">
+          <span className="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
+          <span className="w-2 h-2 rounded-full bg-purple-900/60" />
+          <span className="w-2 h-2 rounded-full bg-purple-900/60" />
         </div>
 
       </div>

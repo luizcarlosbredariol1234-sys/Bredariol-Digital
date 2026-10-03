@@ -1,4 +1,6 @@
 import { PortfolioProject, ServiceItem, TestimonialItem } from '../types';
+import krmSiteImage from '../assets/images/krm_portfolio_mockup_1791033102155.jpg';
+import krmSiteSvg from '../assets/images/krm-site.svg';
 
 export const AGENCY_INFO = {
   name: "Bredariol Digital",
@@ -119,7 +121,42 @@ export const SERVICES_LIST: ServiceItem[] = [
   }
 ];
 
-export const PORTFOLIO_PROJECTS: PortfolioProject[] = [];
+export { krmSiteImage, krmSiteSvg };
+
+export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
+  {
+    id: "krm-engenharia",
+    title: "KRM - Refrigeração, Elétrica & Placa Solar",
+    client: "Kleison Rogério • Chavantes - SP e Região",
+    category: "institucional",
+    categoryLabel: "Engenharia & Climatização",
+    description: "Engenharia e climatização de precisão milimétrica. Sistemas solares com até 95% de redução na conta, instalação no rigoroso padrão de fábrica e adequação elétrica NBR 5410.",
+    deliveryTime: "Entregue no Mesmo Dia",
+    metrics: [
+      { label: "Economia Solar", value: "Até 95%" },
+      { label: "Padrão Técnico", value: "NBR 5410" },
+      { label: "Google PageSpeed", value: "100/100" }
+    ],
+    tags: [
+      "Energia Solar Fotovoltaica",
+      "Climatização Inverter",
+      "Engenharia Elétrica NBR 5410",
+      "Perfis & Fitas de LED"
+    ],
+    imageUrl: krmSiteImage,
+    previewUrl: "https://wa.me/5514981346255?text=Ol%C3%A1%20KRM%2C%20vi%20o%20site%20desenvolvido%20pela%20Bredariol%20Digital",
+    features: [
+      "Engenharia e climatização de precisão milimétrica",
+      "Sistemas solares com até 95% de redução na conta de energia",
+      "Instalação de ar-condicionado no rigoroso padrão de fábrica",
+      "Adequação elétrica conforme norma técnica NBR 5410",
+      "Projetos luminotécnicos modernos com perfis de LED",
+      "Processo a Vácuo <500µ e Homologação Solar Direta",
+      "Garantia total de mão de obra e suporte técnico"
+    ],
+    highlight: "Engenharia de precisão milimétrica com alta autoridade e conversão"
+  }
+];
 
 export const TESTIMONIALS_LIST: TestimonialItem[] = [
   {

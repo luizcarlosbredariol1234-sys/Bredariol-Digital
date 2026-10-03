@@ -1,20 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
-import { 
-  Sparkles, 
-  ArrowRight, 
-  Clock, 
-  Zap, 
-  ShieldCheck, 
-  Smartphone, 
-  TrendingUp, 
-  CheckCircle2, 
-  Star,
-  ExternalLink,
-  Laptop,
-  Gauge
-} from 'lucide-react';
-import { BredariolLogo } from './BredariolLogo';
+import { ArrowRight } from 'lucide-react';
 import { AGENCY_INFO } from '../data/agencyData';
 
 interface HeroSectionProps {
@@ -22,222 +8,172 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
-  const [activeDevice, setActiveDevice] = useState<'desktop' | 'mobile'>('desktop');
-
-  const scrollToServices = () => {
-    const el = document.getElementById('servicos');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const handleWhatsAppClick = () => {
+    const message = encodeURIComponent(
+      "Olá! Gostaria de conversar com a Bredariol Digital para criar uma experiência digital de alto impacto para minha empresa."
+    );
+    window.open(`https://wa.me/55${AGENCY_INFO.whatsappNumber}?text=${message}`, '_blank');
   };
 
   return (
-    <section id="inicio" className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-      {/* Background ambient lighting and grid */}
-      <div className="absolute inset-0 ambient-grid pointer-events-none opacity-40" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[550px] ambient-spotlight pointer-events-none" />
+    <section id="inicio" className="relative min-h-[92vh] pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-black text-white flex flex-col justify-center">
       
-      {/* Subtle floating purple spheres */}
-      <div className="absolute top-20 -left-40 w-96 h-96 rounded-full bg-purple-600/10 blur-[120px] pointer-events-none" />
-      <div className="absolute top-40 -right-40 w-96 h-96 rounded-full bg-fuchsia-600/10 blur-[130px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      {/* Background Graphic: Giant Angular Geometric Purple Vector Lines (matching reference V/diamond) */}
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
+        {/* Subtle purple radial glow */}
+        <div className="absolute w-[600px] sm:w-[900px] h-[600px] sm:h-[900px] bg-purple-900/20 rounded-full blur-[160px] opacity-70" />
+        
+        {/* SVG Geometric Facets & Star Dust Lines */}
+        <svg
+          viewBox="0 0 1000 1000"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute w-[1200px] h-[1200px] max-w-none opacity-40"
+        >
+          {/* Giant Angular Perspective V Lines */}
+          <path
+            d="M500 950 L200 50 L350 50 L500 800 L650 50 L800 50 Z"
+            fill="url(#purpleGrad)"
+            opacity="0.25"
+          />
+          <path
+            d="M500 950 L200 50"
+            stroke="rgba(168, 85, 247, 0.4)"
+            strokeWidth="1.5"
+            strokeDasharray="4 4"
+          />
+          <path
+            d="M500 950 L800 50"
+            stroke="rgba(168, 85, 247, 0.4)"
+            strokeWidth="1.5"
+            strokeDasharray="4 4"
+          />
+          <circle cx="500" cy="500" r="320" stroke="rgba(168, 85, 247, 0.15)" strokeWidth="1" />
+          <circle cx="500" cy="500" r="440" stroke="rgba(168, 85, 247, 0.08)" strokeWidth="1" />
           
-          {/* Left Column: Value Proposition & CTAs */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
-            
-            {/* Urgent & High-End Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/60 border border-purple-600/40 text-purple-200 text-xs sm:text-sm font-semibold mb-6 shadow-[0_0_20px_rgba(147,51,234,0.25)]"
-            >
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
-              </span>
-              <span className="text-purple-300 font-bold uppercase tracking-wider text-[11px] sm:text-xs">
-                Diferencial Exclusivo
-              </span>
-              <span className="text-slate-400">•</span>
-              <span className="text-white font-medium">Entregamos no mesmo dia</span>
-            </motion.div>
+          {/* Subtle glowing dots / stars */}
+          <circle cx="280" cy="300" r="3" fill="#c084fc" opacity="0.8" />
+          <circle cx="720" cy="240" r="3" fill="#c084fc" opacity="0.8" />
+          <circle cx="610" cy="620" r="2" fill="#c084fc" opacity="0.6" />
+          <circle cx="390" cy="740" r="2.5" fill="#c084fc" opacity="0.7" />
 
-            {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.08] text-white"
-            >
-              <span className="block text-gradient">Mais presença.</span>
-              <span className="block text-gradient-vibrant">Mais clientes.</span>
-              <span className="block text-gradient">Mais resultados.</span>
-            </motion.h1>
+          <defs>
+            <linearGradient id="purpleGrad" x1="500" y1="50" x2="500" y2="950" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#9333ea" stopOpacity="0.6" />
+              <stop offset="0.5" stopColor="#6b21a8" stopOpacity="0.2" />
+              <stop offset="1" stopColor="#000000" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
 
-            {/* Subheading */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-6 text-base sm:text-lg md:text-xl text-slate-300 font-normal leading-relaxed max-w-2xl"
-            >
-              A <strong className="text-white font-semibold">Bredariol Digital</strong> cria sites modernos, velozes e de alto padrão para empresas que querem consolidar autoridade e aumentar seu faturamento. Tenha sua empresa no topo da internet hoje mesmo.
-            </motion.p>
+      <div className="max-w-5xl mx-auto px-5 sm:px-8 relative z-10 w-full text-left">
+        
+        {/* Eyebrow Label matching reference image */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-xs font-mono tracking-widest text-purple-400 uppercase mb-6 flex items-center gap-2"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
+          <span>DIGITAL EXPERIENCES / BREDARIOL DIGITAL®</span>
+        </motion.div>
 
-            {/* Call To Actions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto"
-            >
-              {/* Primary High-Converting CTA */}
-              <button
-                onClick={onOpenContact}
-                className="relative group overflow-hidden px-7 py-4 rounded-full font-bold text-base sm:text-lg text-white transition-all duration-300 shadow-[0_0_35px_rgba(189,0,255,0.45)] hover:shadow-[0_0_50px_rgba(189,0,255,0.75)] hover:scale-[1.02] active:scale-[0.98] text-center"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-fuchsia-600 to-purple-800 transition-all duration-300 group-hover:opacity-90" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.3),transparent_70%)]" />
-                <span className="relative flex items-center justify-center gap-2.5">
-                  <Sparkles className="w-5 h-5 text-purple-200 animate-pulse" />
-                  <span>Solicitar um site para minha empresa</span>
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </span>
-              </button>
-
-              {/* Secondary CTA */}
-              <button
-                onClick={scrollToServices}
-                className="px-6 py-4 rounded-full font-semibold text-sm sm:text-base text-slate-200 hover:text-white bg-slate-900/60 hover:bg-purple-950/40 border border-purple-800/30 hover:border-purple-600/60 transition-all duration-300 flex items-center justify-center gap-2 text-center"
-              >
-                <span>Conhecer Nossos Serviços</span>
-              </button>
-            </motion.div>
-
-            {/* Quick Micro-Trust Indicators */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="mt-10 pt-8 border-t border-purple-900/30 grid grid-cols-2 sm:grid-cols-3 gap-4 w-full max-w-xl"
-            >
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="text-xs sm:text-sm text-slate-300 font-medium">Entrega no mesmo dia</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0" />
-                <span className="text-xs sm:text-sm text-slate-300 font-medium">100% Responsivo</span>
-              </div>
-              <div className="flex items-center gap-2 col-span-2 sm:col-span-1">
-                <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0" />
-                <span className="text-xs sm:text-sm text-slate-300 font-medium">Em todo o Brasil</span>
-              </div>
-            </motion.div>
+        {/* Giant Headline with Purple Ambient Glow in Background */}
+        <div className="relative mb-8">
+          
+          {/* Roxo de fundo atmosférico exatamente no lugar onde ficava a letra B */}
+          <div className="absolute -top-8 sm:-top-16 md:-top-20 right-0 sm:right-4 md:right-10 w-[290px] sm:w-[480px] md:w-[600px] h-[290px] sm:h-[480px] md:h-[600px] pointer-events-none select-none z-0 overflow-visible">
+            {/* Glow roxo elegante e profundo */}
+            <div 
+              className="absolute inset-0 rounded-full blur-[100px] sm:blur-[130px] opacity-75 pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle, rgba(147,51,234,0.45) 0%, rgba(126,34,206,0.25) 45%, rgba(88,28,135,0.1) 70%, transparent 85%)'
+              }}
+            />
+            {/* Núcleo de luz roxa sutil no centro */}
+            <div 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 sm:w-72 h-48 sm:h-72 rounded-full blur-[60px] opacity-55 pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle, rgba(168,85,247,0.5) 0%, rgba(147,51,234,0.2) 60%, transparent 80%)'
+              }}
+            />
           </div>
 
-          {/* Right Column: Visual Showcase featuring the Bredariol Emblem and Live Preview */}
-          <div className="lg:col-span-5 relative">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative rounded-2xl p-1 bg-gradient-to-b from-purple-500/40 via-purple-900/20 to-transparent shadow-[0_0_50px_rgba(157,78,221,0.25)]"
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="relative z-10"
+          >
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.92] font-['Space_Grotesk'] text-white">
+              SEU FUTURO<br />
+              COMEÇA <span className="text-white">NA</span><br />
+              <span className="text-stroke-white tracking-normal font-black">TELA.</span>
+            </h1>
+          </motion.div>
+        </div>
+
+        {/* Content Row: Floating Purple Card + Lowercase 'digital experience' + Description */}
+        <div className="relative mt-8 sm:mt-12 pt-6">
+          
+          {/* Floating Card on Left matching screenshot 1 */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-8 inline-block p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-purple-600 via-purple-700 to-purple-900 border border-purple-400/30 text-white shadow-[0_15px_40px_rgba(147,51,234,0.4)] backdrop-blur-md"
+          >
+            <div className="w-8 h-1 bg-white/80 rounded-full mb-3" />
+            <p className="text-xs sm:text-sm font-extrabold uppercase tracking-wider leading-snug">
+              WEBSITES &amp;<br />
+              LANDING PAGES
+            </p>
+          </motion.div>
+
+          {/* Contrast Lowercase Typography: digital experience */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.35 }}
+            className="mb-6"
+          >
+            <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-white font-['Space_Grotesk'] leading-[0.95]">
+              digital<br />
+              experience
+            </h2>
+          </motion.div>
+
+          {/* Description Paragraph */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-base sm:text-lg text-slate-300 max-w-xl leading-relaxed mb-8"
+          >
+            Criamos experiências digitais que transformam ideias, negócios e marcas em presenças que não passam despercebidas.
+          </motion.p>
+
+          {/* Pill Button: FALE CONOSCO → */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.45 }}
+          >
+            <button
+              onClick={handleWhatsAppClick}
+              className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(147,51,234,0.4)] transition-all cursor-pointer group"
             >
-              <div className="relative rounded-[15px] bg-[#0c0716]/95 backdrop-blur-xl border border-purple-700/30 p-5 sm:p-6 overflow-hidden">
-                
-                {/* Header of the mock showcase */}
-                <div className="flex items-center justify-between pb-4 border-b border-purple-900/30">
-                  <div className="flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                      <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                      <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                    </div>
-                    <span className="text-[11px] text-slate-400 font-mono pl-2">bredarioldigital.com.br</span>
-                  </div>
-
-                  {/* Device Switcher */}
-                  <div className="flex items-center bg-purple-950/60 p-1 rounded-lg border border-purple-800/40">
-                    <button
-                      onClick={() => setActiveDevice('desktop')}
-                      className={`p-1.5 rounded text-xs transition-colors ${
-                        activeDevice === 'desktop' ? 'bg-purple-600 text-white' : 'text-slate-400 hover:text-white'
-                      }`}
-                      title="Visualização Desktop"
-                    >
-                      <Laptop className="w-3.5 h-3.5" />
-                    </button>
-                    <button
-                      onClick={() => setActiveDevice('mobile')}
-                      className={`p-1.5 rounded text-xs transition-colors ${
-                        activeDevice === 'mobile' ? 'bg-purple-600 text-white' : 'text-slate-400 hover:text-white'
-                      }`}
-                      title="Visualização Mobile"
-                    >
-                      <Smartphone className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Central Brand Showcase Card with the Fixed Portfolio Logo */}
-                <div className="py-6 flex flex-col items-center justify-center relative">
-                  <div className="absolute inset-0 bg-radial from-purple-600/15 via-transparent to-transparent blur-xl pointer-events-none" />
-
-                  {/* Logo Rendered Cleanly and Prominently */}
-                  <div className="relative z-10 p-4 rounded-2xl bg-black/80 border border-purple-800/40 shadow-2xl w-full max-w-[340px] text-center group hover:border-purple-500/60 transition-all duration-300">
-                    <BredariolLogo variant="full" size="md" withGlow={true} />
-                    
-                    <div className="mt-4 pt-3 border-t border-purple-900/40 flex items-center justify-between text-xs text-slate-300 px-2">
-                      <span className="flex items-center gap-1.5 text-purple-300 font-semibold">
-                        <Clock className="w-3.5 h-3.5 text-purple-400" />
-                        Entrega Hoje
-                      </span>
-                      <span className="flex items-center gap-1 text-emerald-400 font-bold">
-                        <Gauge className="w-3.5 h-3.5" />
-                        100/100 PageSpeed
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Live conversion simulation badge */}
-                  <div className="mt-5 w-full bg-purple-950/40 border border-purple-800/30 rounded-xl p-3.5 flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                        <TrendingUp className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <p className="text-xs text-slate-300 font-medium">Conversão média</p>
-                        <p className="text-sm font-bold text-white">+240% em Vendas</p>
-                      </div>
-                    </div>
-                    <span className="px-2.5 py-1 bg-purple-600/30 border border-purple-500/40 text-purple-300 text-[11px] font-semibold rounded-full">
-                      Padrão Ouro
-                    </span>
-                  </div>
-                </div>
-
-                {/* Bottom stats banner */}
-                <div className="pt-3 border-t border-purple-900/20 flex items-center justify-between text-xs text-slate-400">
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                    ))}
-                    <span className="ml-1 text-slate-200 font-bold">5.0</span>
-                  </div>
-                  <span className="text-[11px] text-purple-300 font-medium">
-                    100% de clientes satisfeitos
-                  </span>
-                </div>
-
-              </div>
-            </motion.div>
-          </div>
+              <span>Fale Conosco</span>
+              <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+            </button>
+          </motion.div>
 
         </div>
 
       </div>
+
     </section>
   );
 };

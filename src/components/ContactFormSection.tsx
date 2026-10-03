@@ -1,22 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import confetti from 'canvas-confetti';
-import { 
-  Sparkles, 
-  Send, 
-  MessageCircle, 
-  Clock, 
-  CheckCircle2, 
-  ShieldCheck, 
-  Phone, 
-  Building, 
-  User, 
-  FileText,
-  Zap,
-  ArrowRight
-} from 'lucide-react';
+import { ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react';
 import { AGENCY_INFO } from '../data/agencyData';
-import { ContactFormData } from '../types';
 
 interface ContactFormSectionProps {
   initialSiteType?: string;
@@ -25,33 +11,22 @@ interface ContactFormSectionProps {
 export const ContactFormSection: React.FC<ContactFormSectionProps> = ({ 
   initialSiteType = 'Landing Page de Alta Conversão' 
 }) => {
-  const [formData, setFormData] = useState<ContactFormData>({
-    fullName: '',
-    companyName: '',
-    segment: '',
-    whatsapp: '',
-    siteType: initialSiteType,
-    timeline: 'Hoje mesmo (Urgente)',
-    notes: '',
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    projectType: initialSiteType,
+    message: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const siteTypes = [
+  const projectTypes = [
     'Landing Page de Alta Conversão',
     'Site Institucional Corporativo',
     'E-commerce & Catálogo Digital',
-    'Site para Clínica / Prestador de Serviços',
-    'Redesign & Modernização de Site',
+    'Redesign & Modernização de Marca',
     'Outro Projeto Sob Medida'
-  ];
-
-  const timelineOptions = [
-    'Hoje mesmo (Urgente)',
-    'Em até 24 a 48 horas',
-    'Nesta semana',
-    'Sem urgência (estou planejando)'
   ];
 
   const handleInputChange = (
@@ -65,330 +40,189 @@ export const ContactFormSection: React.FC<ContactFormSectionProps> = ({
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Trigger celebratory confetti
     try {
       confetti({
-        particleCount: 90,
-        spread: 70,
+        particleCount: 70,
+        spread: 60,
         origin: { y: 0.6 },
-        colors: ['#bd00ff', '#9333ea', '#c084fc', '#ffffff']
+        colors: ['#a855f7', '#c084fc', '#ffffff']
       });
     } catch {
-      // safe fallback
+      // safe
     }
 
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 600);
+    }, 500);
   };
 
-  // Build formatted WhatsApp link
-  const getPreparedWhatsAppUrl = () => {
-    const message = `Olá Bredariol Digital! Acabei de solicitar um site pelo formulário:
-- *Nome*: ${formData.fullName || 'Não informado'}
-- *Empresa*: ${formData.companyName || 'Minha Empresa'} (${formData.segment || 'Geral'})
-- *Tipo de Site*: ${formData.siteType}
-- *Prazo*: ${formData.timeline}
-- *Observações*: ${formData.notes || 'Gostaria de um orçamento e consultoria rápida.'}`;
+  const getDirectWhatsAppUrl = () => {
+    const msg = `Olá Bredariol Digital! Meu nome é ${formData.name || 'Cliente'}.
+- WhatsApp: ${formData.phone || 'Não informado'}
+- Projeto: ${formData.projectType}
+- Mensagem: ${formData.message || 'Gostaria de iniciar um projeto com entrega no mesmo dia.'}`;
 
-    return `https://wa.me/55${AGENCY_INFO.whatsappNumber}?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/55${AGENCY_INFO.whatsappNumber}?text=${encodeURIComponent(msg)}`;
   };
 
   return (
-    <section id="contato" className="py-24 relative overflow-hidden bg-[#05020a]">
-      {/* Background radial effects */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-purple-950/25 blur-[160px] pointer-events-none" />
+    <section id="contato" className="py-24 sm:py-32 bg-gradient-to-b from-black via-[#0a031a] to-black text-white relative overflow-hidden border-t border-purple-900/30">
+      
+      {/* Glows roxos de fundo atmosférico */}
+      <div 
+        className="absolute -right-20 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[150px] opacity-50 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(147,51,234,0.4) 0%, rgba(126,34,206,0.22) 45%, rgba(88,28,135,0.1) 70%, transparent 85%)'
+        }}
+      />
+      <div 
+        className="absolute -left-20 bottom-10 w-[500px] h-[500px] rounded-full blur-[140px] opacity-35 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(147,51,234,0.3) 0%, rgba(88,28,135,0.15) 50%, transparent 80%)'
+        }}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8 relative z-10 text-left">
         
-        {/* Section Heading */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/70 border border-purple-700/40 text-purple-300 text-xs font-semibold uppercase tracking-wider mb-4"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-            <span>Atendimento Prioritário</span>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight"
-          >
-            Solicitar um site para <span className="text-gradient-vibrant">minha empresa</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed"
-          >
-            Preencha os campos abaixo em menos de 1 minuto. Analisamos seu projeto imediatamente e podemos entregar sua estrutura hoje mesmo!
-          </motion.p>
-        </div>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-14"
+        >
+          <p className="text-xs font-mono tracking-widest text-purple-400 uppercase mb-4">
+            ● 05 / CONTATO
+          </p>
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-tight font-['Space_Grotesk'] text-white">
+            Vamos criar algo que não passa despercebido.
+          </h2>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Column: Guarantees and Direct WhatsApp Contact */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
-            
-            {/* Same Day Delivery Card */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-purple-950/60 to-[#0c0716] border border-purple-700/40 shadow-xl relative overflow-hidden">
-              <div className="w-12 h-12 rounded-xl bg-purple-600/30 border border-purple-500/50 flex items-center justify-center text-purple-300 mb-4 shadow-[0_0_20px_rgba(168,85,247,0.3)]">
-                <Clock className="w-6 h-6 text-purple-300 animate-pulse" />
-              </div>
-
-              <h3 className="text-xl font-bold text-white mb-2">
-                Compromisso de Entrega no Mesmo Dia
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
-                Entendemos que cada dia sem um site moderno é um dia de clientes perdidos para a concorrência. Desenvolvemos com agilidade e foco cirúrgico no seu negócio.
+          {/* Direct Info */}
+          <div className="lg:col-span-5 space-y-8">
+            <div>
+              <p className="text-xs font-mono tracking-widest uppercase text-slate-500 mb-1">
+                WhatsApp Comercial
               </p>
-
-              <div className="space-y-2 pt-4 border-t border-purple-900/40 text-xs text-slate-300">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Atendimento humano direto pelo WhatsApp</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Sem burocracia ou termos técnicos complicados</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Garantia de satisfação e suporte dedicado</span>
-                </div>
-              </div>
+              <a 
+                href={AGENCY_INFO.whatsappUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-xl sm:text-2xl font-bold text-white hover:text-purple-400 transition-colors font-['Space_Grotesk']"
+              >
+                {AGENCY_INFO.whatsappFormatted}
+              </a>
             </div>
 
-            {/* Direct Instant WhatsApp Box */}
-            <div className="p-6 rounded-2xl bg-[#0e0818]/90 border border-emerald-900/40 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
-                  <MessageCircle className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-white">Prefere falar direto pelo WhatsApp?</h4>
-                  <p className="text-xs text-emerald-400 font-medium">Resposta em menos de 5 minutos</p>
-                </div>
-              </div>
-
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Clique no botão abaixo para iniciar uma conversa direta com nosso especialista:
+            <div>
+              <p className="text-xs font-mono tracking-widest uppercase text-slate-500 mb-1">
+                Atendimento
               </p>
+              <p className="text-sm text-slate-300">
+                Empresas em todo o Brasil · Entrega no mesmo dia
+              </p>
+            </div>
 
+            <div className="pt-4">
               <a
                 href={AGENCY_INFO.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-600 hover:bg-emerald-500 transition-all shadow-[0_0_20px_rgba(16,185,129,0.35)] flex items-center justify-center gap-2"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(147,51,234,0.4)]"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>Chamar no WhatsApp ({AGENCY_INFO.whatsappFormatted})</span>
+                <span>Fale Conosco no WhatsApp</span>
+                <ArrowRight className="w-4 h-4" />
               </a>
             </div>
-
           </div>
 
-          {/* Right Column: Contact & Briefing Form */}
+          {/* Form */}
           <div className="lg:col-span-7">
-            <div className="rounded-2xl p-1 bg-gradient-to-b from-purple-700/30 via-purple-950/20 to-transparent shadow-2xl">
-              <div className="rounded-[15px] bg-[#0c0716] border border-purple-800/40 p-6 sm:p-8">
-                
-                {isSubmitted ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="py-10 text-center flex flex-col items-center"
-                  >
-                    <div className="w-16 h-16 rounded-full bg-purple-600/30 border border-purple-500/50 flex items-center justify-center text-purple-300 mb-5 shadow-[0_0_30px_rgba(189,0,255,0.4)]">
-                      <CheckCircle2 className="w-10 h-10 text-emerald-400" />
-                    </div>
-
-                    <h3 className="text-2xl font-bold text-white mb-2">
-                      Solicitação Recebida com Sucesso!
-                    </h3>
-                    <p className="text-sm text-slate-300 max-w-md mx-auto mb-6">
-                      Recebemos seu pedido para a empresa <strong className="text-white">{formData.companyName || 'sua empresa'}</strong>. Para acelerar o início do seu site, clique no botão abaixo para confirmar no WhatsApp:
-                    </p>
-
-                    <a
-                      href={getPreparedWhatsAppUrl()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-8 py-4 rounded-full font-bold text-base text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-[0_0_25px_rgba(16,185,129,0.45)] flex items-center gap-2.5 transition-all hover:scale-105"
-                    >
-                      <MessageCircle className="w-5 h-5" />
-                      <span>Confirmar e Iniciar no WhatsApp Agora</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-
-                    <button
-                      onClick={() => setIsSubmitted(false)}
-                      className="mt-6 text-xs text-purple-400 hover:text-purple-300 underline"
-                    >
-                      Enviar outra mensagem
-                    </button>
-                  </motion.div>
-                ) : (
-                  <form onSubmit={handleFormSubmit} className="space-y-5">
-                    
-                    {/* Row 1: Full Name & Company */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                          <User className="w-3.5 h-3.5 text-purple-400" />
-                          <span>Seu Nome Completo *</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="fullName"
-                          required
-                          value={formData.fullName}
-                          onChange={handleInputChange}
-                          placeholder="Ex: Carlos Eduardo"
-                          className="w-full px-4 py-3 rounded-xl bg-purple-950/30 border border-purple-800/40 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white placeholder-slate-500 text-sm outline-none transition-all"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                          <Building className="w-3.5 h-3.5 text-purple-400" />
-                          <span>Nome da Sua Empresa *</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="companyName"
-                          required
-                          value={formData.companyName}
-                          onChange={handleInputChange}
-                          placeholder="Ex: Nova Era Engenharia"
-                          className="w-full px-4 py-3 rounded-xl bg-purple-950/30 border border-purple-800/40 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white placeholder-slate-500 text-sm outline-none transition-all"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Row 2: WhatsApp & Segment */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                          <Phone className="w-3.5 h-3.5 text-purple-400" />
-                          <span>WhatsApp com DDD *</span>
-                        </label>
-                        <input
-                          type="tel"
-                          name="whatsapp"
-                          required
-                          value={formData.whatsapp}
-                          onChange={handleInputChange}
-                          placeholder="Ex: (11) 99999-8888"
-                          className="w-full px-4 py-3 rounded-xl bg-purple-950/30 border border-purple-800/40 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white placeholder-slate-500 text-sm outline-none transition-all"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                          Segmento do Negócio
-                        </label>
-                        <input
-                          type="text"
-                          name="segment"
-                          value={formData.segment}
-                          onChange={handleInputChange}
-                          placeholder="Ex: Clínica Médica, Construtora, E-commerce..."
-                          className="w-full px-4 py-3 rounded-xl bg-purple-950/30 border border-purple-800/40 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white placeholder-slate-500 text-sm outline-none transition-all"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Row 3: Site Type Select */}
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                        Tipo de Site Desejado *
-                      </label>
-                      <select
-                        name="siteType"
-                        value={formData.siteType}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 rounded-xl bg-purple-950/40 border border-purple-800/40 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white text-sm outline-none transition-all cursor-pointer"
-                      >
-                        {siteTypes.map((type, idx) => (
-                          <option key={idx} value={type} className="bg-[#0b0614] text-white">
-                            {type}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Row 4: Urgency / Delivery Timeline */}
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-purple-400" />
-                        <span>Qual é a sua urgência de entrega?</span>
-                      </label>
-                      <select
-                        name="timeline"
-                        value={formData.timeline}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 rounded-xl bg-purple-950/40 border border-purple-800/40 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white text-sm outline-none transition-all cursor-pointer"
-                      >
-                        {timelineOptions.map((opt, idx) => (
-                          <option key={idx} value={opt} className="bg-[#0b0614] text-white">
-                            {opt}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Row 5: Notes / Project Description */}
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                        <FileText className="w-3.5 h-3.5 text-purple-400" />
-                        <span>O que sua empresa precisa? (Opcional)</span>
-                      </label>
-                      <textarea
-                        name="notes"
-                        rows={3}
-                        value={formData.notes}
-                        onChange={handleInputChange}
-                        placeholder="Ex: Quero aumentar minhas vendas no Google, preciso de um site moderno que transmita confiança..."
-                        className="w-full px-4 py-3 rounded-xl bg-purple-950/30 border border-purple-800/40 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white placeholder-slate-500 text-sm outline-none transition-all resize-none"
-                      />
-                    </div>
-
-                    {/* Submit Button */}
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-4 px-6 rounded-full font-bold text-base text-white bg-gradient-to-r from-purple-600 via-fuchsia-600 to-purple-700 hover:from-purple-500 hover:to-fuchsia-500 transition-all shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:shadow-[0_0_40px_rgba(189,0,255,0.7)] flex items-center justify-center gap-2 disabled:opacity-50"
-                    >
-                      {isSubmitting ? (
-                        <span>Processando solicitação...</span>
-                      ) : (
-                        <>
-                          <Zap className="w-5 h-5" />
-                          <span>Solicitar um site para minha empresa</span>
-                        </>
-                      )}
-                    </button>
-
-                    <p className="text-[11px] text-center text-slate-400">
-                      🔒 Seus dados estão 100% seguros. Não enviamos spam.
-                    </p>
-
-                  </form>
-                )}
-
+            {isSubmitted ? (
+              <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center">
+                <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
+                <h3 className="text-2xl font-bold text-white mb-2">Mensagem Enviada!</h3>
+                <p className="text-sm text-slate-400 mb-6">
+                  Seus dados foram recebidos. Clique abaixo para abrir a conversa no WhatsApp diretamente com nossa equipe.
+                </p>
+                <a
+                  href={getDirectWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-emerald-600 text-white font-bold text-xs uppercase tracking-widest"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Iniciar no WhatsApp</span>
+                </a>
               </div>
-            </div>
+            ) : (
+              <form onSubmit={handleFormSubmit} className="space-y-4">
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    placeholder="Seu Nome Completo"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    placeholder="Seu WhatsApp ou Telefone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <select
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleInputChange}
+                    className="w-full px-5 py-3.5 rounded-2xl bg-[#090414] border border-white/10 text-sm text-white focus:outline-none focus:border-purple-500 transition-all cursor-pointer"
+                  >
+                    {projectTypes.map((type, idx) => (
+                      <option key={idx} value={type} className="bg-[#090414] text-white">
+                        {type}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <textarea
+                    rows={4}
+                    name="message"
+                    required
+                    placeholder="Fale um pouco sobre sua empresa e o que você precisa..."
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-all resize-none"
+                  />
+                </div>
+
+                <div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs uppercase tracking-widest transition-all cursor-pointer shadow-[0_0_25px_rgba(147,51,234,0.4)] disabled:opacity-50"
+                  >
+                    <span>{isSubmitting ? 'Enviando...' : 'Fale Conosco →'}</span>
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
 
         </div>

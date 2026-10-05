@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import confetti from 'canvas-confetti';
 import { ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react';
 import { AGENCY_INFO } from '../data/agencyData';
+import { PurpleBackgroundSparkles } from './PurpleBackgroundSparkles';
 
 interface ContactFormSectionProps {
   initialSiteType?: string;
@@ -69,19 +70,8 @@ export const ContactFormSection: React.FC<ContactFormSectionProps> = ({
   return (
     <section id="contato" className="py-24 sm:py-32 bg-gradient-to-b from-black via-[#0a031a] to-black text-white relative overflow-hidden border-t border-purple-900/30">
       
-      {/* Glows roxos de fundo atmosférico */}
-      <div 
-        className="absolute -right-20 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[150px] opacity-50 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(147,51,234,0.4) 0%, rgba(126,34,206,0.22) 45%, rgba(88,28,135,0.1) 70%, transparent 85%)'
-        }}
-      />
-      <div 
-        className="absolute -left-20 bottom-10 w-[500px] h-[500px] rounded-full blur-[140px] opacity-35 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(147,51,234,0.3) 0%, rgba(88,28,135,0.15) 50%, transparent 80%)'
-        }}
-      />
+      {/* Brilhos e atmosfera roxa de fundo */}
+      <PurpleBackgroundSparkles position="both" />
 
       <div className="max-w-5xl mx-auto px-5 sm:px-8 relative z-10 text-left">
         
@@ -103,7 +93,13 @@ export const ContactFormSection: React.FC<ContactFormSectionProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Direct Info */}
-          <div className="lg:col-span-5 space-y-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5 space-y-8"
+          >
             <div>
               <p className="text-xs font-mono tracking-widest uppercase text-slate-500 mb-1">
                 WhatsApp Comercial
@@ -138,10 +134,16 @@ export const ContactFormSection: React.FC<ContactFormSectionProps> = ({
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Form */}
-          <div className="lg:col-span-7">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="lg:col-span-7"
+          >
             {isSubmitted ? (
               <div className="p-8 rounded-3xl bg-white/5 border border-white/10 text-center">
                 <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
@@ -185,19 +187,38 @@ export const ContactFormSection: React.FC<ContactFormSectionProps> = ({
                   />
                 </div>
 
-                <div>
-                  <select
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleInputChange}
-                    className="w-full px-5 py-3.5 rounded-2xl bg-[#090414] border border-white/10 text-sm text-white focus:outline-none focus:border-purple-500 transition-all cursor-pointer"
-                  >
-                    {projectTypes.map((type, idx) => (
-                      <option key={idx} value={type} className="bg-[#090414] text-white">
-                        {type}
-                      </option>
-                    ))}
-                  </select>
+                <div className="space-y-2 pt-1">
+                  <label className="text-xs font-mono uppercase tracking-wider text-purple-300 block">
+                    Opções de Projeto:
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {projectTypes.map((type, idx) => {
+                      const isSelected = formData.projectType === type;
+                      return (
+                        <motion.button
+                          key={idx}
+                          type="button"
+                          initial={{ opacity: 0, y: 15 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.35, delay: idx * 0.06 }}
+                          onClick={() => setFormData(prev => ({ ...prev, projectType: type }))}
+                          className={`flex items-center justify-between p-3 rounded-xl border text-left text-xs transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-purple-600/30 border-purple-400 text-white shadow-[0_0_15px_rgba(168,85,247,0.35)]'
+                              : 'bg-white/5 border-white/10 text-slate-300 hover:border-purple-500/50 hover:bg-white/10'
+                          }`}
+                        >
+                          <span className="font-medium truncate">{type}</span>
+                          {isSelected ? (
+                            <CheckCircle2 className="w-4 h-4 text-purple-300 shrink-0 ml-1.5" />
+                          ) : (
+                            <span className="w-3.5 h-3.5 rounded-full border border-white/20 shrink-0 ml-1.5" />
+                          )}
+                        </motion.button>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 <div>
@@ -223,8 +244,7 @@ export const ContactFormSection: React.FC<ContactFormSectionProps> = ({
                 </div>
               </form>
             )}
-          </div>
-
+          </motion.div>
         </div>
 
       </div>

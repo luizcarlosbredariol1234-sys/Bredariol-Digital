@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { AGENCY_INFO } from '../data/agencyData';
+import { PurpleBackgroundSparkles } from './PurpleBackgroundSparkles';
 
 interface HeroSectionProps {
   onOpenContact: () => void;
@@ -18,6 +19,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
   return (
     <section id="inicio" className="relative min-h-[92vh] pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-black text-white flex flex-col justify-center">
       
+      {/* Brilhos roxos de fundo e partículas estelares */}
+      <PurpleBackgroundSparkles position="right" />
+
       {/* Background Graphic: Giant Angular Geometric Purple Vector Lines (matching reference V/diamond) */}
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
         {/* Subtle purple radial glow */}

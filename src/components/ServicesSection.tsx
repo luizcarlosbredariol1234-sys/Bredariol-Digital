@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { AGENCY_INFO } from '../data/agencyData';
+import { PurpleBackgroundSparkles } from './PurpleBackgroundSparkles';
 
 interface ServicesSectionProps {
   onSelectService?: (serviceTitle: string) => void;
@@ -43,13 +44,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
   return (
     <section id="servicos" className="py-24 sm:py-32 bg-gradient-to-b from-black via-[#0b031d] to-black text-white relative overflow-hidden border-t border-purple-900/30">
       
-      {/* Glow roxo de fundo atmosférico */}
-      <div 
-        className="absolute -right-20 top-1/3 w-[600px] h-[600px] rounded-full blur-[150px] opacity-45 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(147,51,234,0.4) 0%, rgba(126,34,206,0.22) 45%, rgba(88,28,135,0.1) 70%, transparent 85%)'
-        }}
-      />
+      {/* Brilhos e atmosfera roxa de fundo */}
+      <PurpleBackgroundSparkles position="right" />
 
       <div className="max-w-5xl mx-auto px-5 sm:px-8 relative z-10 text-left">
         
@@ -73,15 +69,16 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
           {items.map((item, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="py-10 sm:py-12 group flex flex-col justify-between"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              className="py-10 sm:py-12 group flex flex-col justify-between hover:bg-white/[0.015] px-4 -mx-4 rounded-2xl transition-colors duration-300"
             >
               {/* Category Index Tag (e.g. 01 / WEB) */}
-              <p className="text-xs font-mono tracking-widest text-purple-400 uppercase mb-3">
-                {item.num}
+              <p className="text-xs font-mono tracking-widest text-purple-400 uppercase mb-3 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
+                <span>{item.num}</span>
               </p>
 
               {/* Title */}

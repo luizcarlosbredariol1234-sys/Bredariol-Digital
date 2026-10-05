@@ -144,7 +144,8 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       "Perfis & Fitas de LED"
     ],
     imageUrl: krmSiteImage,
-    previewUrl: "https://wa.me/5514981346255?text=Ol%C3%A1%20KRM%2C%20vi%20o%20site%20desenvolvido%20pela%20Bredariol%20Digital",
+    previewUrl: "https://krm-eusy-five.vercel.app/",
+    whatsappUrl: "https://wa.me/5514981346255?text=Ol%C3%A1%20KRM%2C%20vi%20o%20site%20desenvolvido%20pela%20Bredariol%20Digital",
     features: [
       "Engenharia e climatização de precisão milimétrica",
       "Sistemas solares com até 95% de redução na conta de energia",

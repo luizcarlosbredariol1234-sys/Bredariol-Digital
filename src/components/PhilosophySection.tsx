@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowDown } from 'lucide-react';
+import { PurpleBackgroundSparkles } from './PurpleBackgroundSparkles';
 
 export const PhilosophySection: React.FC = () => {
   const [activeItem, setActiveItem] = useState<string | null>('EXPERIENCE');
@@ -35,13 +36,8 @@ export const PhilosophySection: React.FC = () => {
   return (
     <section id="filosofia" className="py-24 sm:py-32 bg-gradient-to-b from-black via-[#0a031a] to-black text-white relative overflow-hidden border-t border-purple-900/30">
       
-      {/* Glow roxo de fundo atmosférico */}
-      <div 
-        className="absolute -left-28 top-20 w-[600px] h-[600px] rounded-full blur-[150px] opacity-45 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(147,51,234,0.4) 0%, rgba(126,34,206,0.22) 45%, rgba(88,28,135,0.1) 70%, transparent 85%)'
-        }}
-      />
+      {/* Brilhos e atmosfera roxa de fundo */}
+      <PurpleBackgroundSparkles position="left" />
 
       <div className="max-w-5xl mx-auto px-5 sm:px-8 relative z-10 text-left">
         
@@ -89,10 +85,17 @@ export const PhilosophySection: React.FC = () => {
 
         {/* Interactive Accordion List matching screenshot 2 */}
         <div className="border-t border-white/10 divide-y divide-white/10 max-w-3xl">
-          {pillars.map((pillar) => {
+          {pillars.map((pillar, idx) => {
             const isOpen = activeItem === pillar.id;
             return (
-              <div key={pillar.id} className="py-6 sm:py-7">
+              <motion.div 
+                key={pillar.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="py-6 sm:py-7"
+              >
                 <button
                   onClick={() => toggleItem(pillar.id)}
                   className="w-full flex items-center justify-between text-left group cursor-pointer"
@@ -122,7 +125,7 @@ export const PhilosophySection: React.FC = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             );
           })}
         </div>

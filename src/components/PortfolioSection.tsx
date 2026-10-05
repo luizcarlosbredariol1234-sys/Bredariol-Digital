@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { PORTFOLIO_PROJECTS, AGENCY_INFO, krmSiteImage, krmSiteSvg } from '../data/agencyData';
 import { PortfolioProject } from '../types';
+import { PurpleBackgroundSparkles } from './PurpleBackgroundSparkles';
 
 interface PortfolioSectionProps {
   onSelectProject: (project: PortfolioProject) => void;
@@ -46,19 +47,8 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
   return (
     <section id="portfolio" className="py-24 sm:py-32 bg-gradient-to-b from-black via-[#0a031c] to-black text-white relative overflow-hidden border-t border-purple-900/30">
       
-      {/* Glows roxos de fundo atmosférico */}
-      <div 
-        className="absolute -right-24 top-1/4 w-[650px] h-[650px] rounded-full blur-[160px] opacity-45 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(147,51,234,0.4) 0%, rgba(126,34,206,0.2) 45%, rgba(88,28,135,0.1) 70%, transparent 85%)'
-        }}
-      />
-      <div 
-        className="absolute -left-24 bottom-1/4 w-[600px] h-[600px] rounded-full blur-[150px] opacity-35 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(147,51,234,0.35) 0%, rgba(88,28,135,0.15) 50%, transparent 80%)'
-        }}
-      />
+      {/* Brilhos e atmosfera roxa de fundo */}
+      <PurpleBackgroundSparkles position="both" />
 
       <div className="max-w-5xl mx-auto px-5 sm:px-8 relative z-10 text-left">
         
@@ -111,10 +101,11 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 50, scale: 0.98 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.15 }}
                 exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.22, 1, 0.36, 1] }}
                 className="group flex flex-col rounded-3xl bg-[#090514] border border-white/10 hover:border-purple-500/50 transition-all duration-300 overflow-hidden relative shadow-2xl"
               >
                 {/* Browser Frame Header */}
@@ -124,10 +115,25 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                   </div>
-                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 border border-purple-800/30 font-mono text-[10px] text-purple-300">
-                    <Lock className="w-2.5 h-2.5 text-emerald-400" />
-                    <span>krmrefrigeracao.com.br</span>
-                  </div>
+                  {project.previewUrl ? (
+                    <a
+                      href={project.previewUrl.startsWith('http') ? project.previewUrl : `https://${project.previewUrl}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 hover:bg-purple-950/70 border border-purple-800/40 hover:border-purple-500/60 font-mono text-[10px] text-purple-300 hover:text-white transition-all cursor-pointer group/link shadow-sm"
+                      title="Clique para abrir o site oficial"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Lock className="w-2.5 h-2.5 text-emerald-400" />
+                      <span className="underline decoration-purple-500/40 group-hover/link:decoration-white">{project.previewUrl.replace('https://', '').replace('http://', '').replace(/\/$/, '')}</span>
+                      <ExternalLink className="w-2.5 h-2.5 text-purple-400 group-hover/link:text-white" />
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 border border-purple-800/30 font-mono text-[10px] text-purple-300">
+                      <Lock className="w-2.5 h-2.5 text-emerald-400" />
+                      <span>krm-eusy-five.vercel.app</span>
+                    </div>
+                  )}
                   <div className="flex items-center gap-1 text-[10px] font-mono text-emerald-400 font-semibold">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     <span>100/100</span>
@@ -185,10 +191,11 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                         href={project.previewUrl.startsWith('http') ? project.previewUrl : `https://${project.previewUrl}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 py-2.5 px-3 rounded-full font-bold text-xs text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-95 transition-all flex items-center justify-center gap-1.5 shadow-md cursor-pointer"
+                        className="flex-1 py-2.5 px-3 rounded-full font-bold text-xs text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.3)] cursor-pointer group/site"
+                        title={`Acessar site oficial da KRM: ${project.previewUrl}`}
                       >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                        <span>Entrar no Site</span>
+                        <ExternalLink className="w-3.5 h-3.5 group-hover/site:rotate-12 transition-transform" />
+                        <span>Entrar no Site Oficial</span>
                       </a>
                     )}
 

@@ -13,6 +13,7 @@ export interface PortfolioProject {
   tags: string[];
   imageUrl: string;
   previewUrl?: string;
+  whatsappUrl?: string;
   features: string[];
   highlight: string;
 }
